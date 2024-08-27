@@ -1,24 +1,14 @@
-'use strict';
+function generateKey(length, characters) {
+    let key = '';
+    const charactersLength = characters.length;
 
-let numOrStr = prompt('input number or string');
-console.log(numOrStr)
+    for (let i = 0; i < length; i++) {
+        key += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
 
-switch (true) {
-    case numOrStr === null:
-        console.log('ви скасували');
-        break;
-    case numOrStr.trim() === '' :
-        console.log('Empty String');
-        break;
-    case  isNaN( +numOrStr )  :
-        console.log('number is Ba_NaN');
-        break;
-    default:
-
-
-
-
-
-
-     console.log('OK!')   
+    return key;
 }
+
+const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+const key = generateKey(16, characters);
+console.log(key);
