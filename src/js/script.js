@@ -1,14 +1,19 @@
-function generateKey(length, characters) {
-    let key = '';
-    const charactersLength = characters.length;
+function padString(str, length, char, addLeft = false) {
+    if (typeof str !== 'string') return 'Помилка: перший аргумент повинен бути рядком';
+    if (typeof length !== 'number') return 'Помилка: другий аргумент повинен бути числом';
+    if (typeof char !== 'string' || char.length !== 1) return 'Помилка: третій аргумент повинен бути рядком довжиною 1 символ';
 
-    for (let i = 0; i < length; i++) {
-        key += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
+    if (str.length >= length) return str.substr(0, length);
 
-    return key;
+    const padLength = length - str.length;
+    const padding = char.repeat(padLength);
+
+    return addLeft ? padding + str : str + padding;
 }
 
-const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-const key = generateKey(16, characters);
-console.log(key);
+// Приклади використання:
+console.log(padString('hello', 8, '*')); 
+console.log(padString('hello', 6, '*', false)); 
+console.log(padString('hello', 2));
+console.log(padString('hello', 10, '!', true)); 
+console.log(padString('hello', 10, '!')); 
